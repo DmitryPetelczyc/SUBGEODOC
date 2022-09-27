@@ -17,8 +17,8 @@ namespace DOCSUBGE
         private Replacer replacer = new Replacer();
         private excell_items_struct[] ex = new excell_items_struct[10];
         private int doc_count = 0;
-        private string[] file_list = new string[10]
-        {
+        private readonly string[] file_list =
+        [
             "1,2 operat techniczny.docx",
             "1,2 operat techniczny_.docx",
             "3 sprawozdanie - wyrys.docx",
@@ -29,7 +29,8 @@ namespace DOCSUBGE
             "8 mapa do celów projektowych.docx",
             "8 wykaz.xlsx",
             "11 MAPA INWENTARYZACYJNA.docx"
-        };
+        ];
+
         private string tbl_svnth_plc_txt = "Arkusz danych dotyczących budynku";
 
         public Form1()
@@ -40,6 +41,10 @@ namespace DOCSUBGE
         private void Form1_Load(object sender, EventArgs e)
         {
             progress_label.Text = "";
+            string imgs_path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\")) + "\\Images\\";
+            pictureBox1.ImageLocation = imgs_path + "full_logo.png";
+            pictureBox2.ImageLocation = imgs_path + "full_logo.png";
+            button2.BackgroundImage = Image.FromFile(imgs_path + "trashcan.png");
         }
 
         private void fill_tag_list()
@@ -486,6 +491,7 @@ namespace DOCSUBGE
                     }
                     // Save the document...
                     string pdf_path = Path.GetDirectoryName(open.FileName);
+                 
                     document.Save(Path.Combine(pdf_path, filename));
                     //System.Diagnostics.Process.Start("explorer", pdf_path);
                     MessageBox.Show("Sukces!", "Page numbers");
@@ -625,8 +631,8 @@ namespace DOCSUBGE
 
         private void button9_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(785, 764);
-            panel7.Location = new Point(0, 0);
+            //this.Size = new Size(785, 764);
+            //panel7.Location = new Point(0, 0);
         }
     }
 }

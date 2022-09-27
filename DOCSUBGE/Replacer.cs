@@ -23,7 +23,18 @@ namespace DOCSUBGE
 
         internal void ReplaceExcell(string file_name, Form1.excell_items_struct[] items, string path)
         {
-            File.Copy(Environment.CurrentDirectory + "\\WORD\\" + file_name, Path.Combine(path, file_name), true);
+            string worddoc_path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\")) + "\\WORD\\";
+
+            try
+            {
+                //File.Copy(Environment.CurrentDirectory + "\\WORD\\" + file_name, Path.Combine(path, file_name), true);
+                File.Copy(worddoc_path + file_name, Path.Combine(path, file_name), true);
+            }
+            catch(System.IO.DirectoryNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
 
             string doc_name = path + "\\" + file_name;
             object missing = Type.Missing;
@@ -87,8 +98,9 @@ namespace DOCSUBGE
 
         internal void ReplaceWord(Dictionary<string, string> items, string file_name, string path, string alternative_name = "")
         {
-            string doc_name = Environment.CurrentDirectory + "\\WORD\\" + file_name;
-            Word.Application app = null;
+            string worddoc_path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\")) + "\\WORD\\";
+            string doc_name = worddoc_path + file_name; //Environment.CurrentDirectory + "\\WORD\\" + file_name;
+            Word.Application app = new Word.Application();
 
             if (File.Exists(doc_name))
             {
