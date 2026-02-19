@@ -6,4 +6,4 @@ The main task of the program is to enter data into the fields for entering infor
 
 The program also has a tool for combining PDF files and drawing signatures and pagination on the combined document.
 
-Program for working with templates created in MS Word and MS Excel.
+Program used templates created in MS Word and MS Excel.
